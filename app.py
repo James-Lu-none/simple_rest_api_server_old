@@ -7,7 +7,7 @@ isPcOn = False
 def get_isPcOn():
     return jsonify({"isPcOn": isPcOn})
 
-@app.route('/api/isPcOn/setTrue', methods=['POST'])
+@app.route('/api/isPcOn/setValue', methods=['POST'])
 def set_isPcOn():
     global isPcOn
     try:
