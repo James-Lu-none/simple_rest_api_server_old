@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 isPcOn = False
@@ -14,15 +14,15 @@ def set_isPcOn():
         # Assuming the value is sent as JSON in the request body
         data = request.json
         value = data.get('value')  # 'increment' or 'decrement'
-        
+
         if value == 'true' or value == '1':
             isPcOn = True
-        if value == 'false' or value == '0':
+        elif value == 'false' or value == '0':
             isPcOn = False
         else:
             return jsonify({"error": "Invalid operation"}), 400
 
-        return jsonify({"isPcOn": isPcOn, "message": f"isPcOn was set to {value}"})
+        return jsonify({"isPcOn": isPcOn, "message": f"isPcOn was set to {isPcOn}"})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
