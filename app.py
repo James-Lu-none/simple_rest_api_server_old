@@ -17,7 +17,7 @@ def set_isPcOn():
         
         if value == 'true' or value == '1':
             isPcOn = True
-        if value == 'true' or value == '0':
+        if value == 'false' or value == '0':
             isPcOn = False
         else:
             return jsonify({"error": "Invalid operation"}), 400
