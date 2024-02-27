@@ -35,6 +35,28 @@ app.post("/api/create",(req,res)=>{
     })();
 });
 
+app.get("/api/pc_status/get",(req,res)=>{
+    (async ()=>{
+        try{
+            var pcId = req.query.pc_id;
+            console.log(pcId);
+            if(pcId === null || typeof pcId !== 'string'){
+                throw Error("pc id was invalid");
+            }
+            // const data = await pc_status_collection.doc(pcId).get();
+            var response
+            await pc_status_collection.doc(pcId).get().then((data)=>{
+                response= data.data();
+                return response;
+            });
+            return res.status(200).send({status: "Success", data: response, msg: "Data retrieved"});
+        }catch(error){
+            console.log(error);
+            return res.status(500).send({status: "Failed", msg: error});
+        }
+    })();
+});
+
 app.put("/api/pc_status/set",(req,res)=>{
     (async ()=>{
         console.log(req.params);
@@ -50,7 +72,7 @@ app.put("/api/pc_status/set",(req,res)=>{
             data = assignBooleanIfNotNullOrUndefined('isPowerOnTriggered', req.body.isPowerOnTriggered, data);
             console.log(data);
             await pc_status_collection.doc(pcId).update(data);
-            return res.status(200).send({status: "Success", msg: "Data Saved"});
+            return res.status(200).send({status: "Success", msg: "Data updated"});
         }catch(error){
             console.log(error);
             return res.status(500).send({status: "Failed", msg: error});
