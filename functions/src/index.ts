@@ -18,23 +18,6 @@ app.get('/', (req, res) => {
    return res.status(200).send("Hi"); 
 });
 
-app.post("/api/create",(req,res)=>{
-    (async ()=>{
-        try{
-            await db.collection('userDetails').doc(`/${Date.now()}/`).create({
-                id:Date.now(),
-                name: req.body.name,
-                mobile: req.body.mobile,
-                address: req.body.address,
-            });
-            return res.status(200).send({status: "Success", msg: "Data Saved"});
-        }catch(error){
-            console.log(error);
-            return res.status(500).send({status: "Failed", msg: error});
-        }
-    })();
-});
-
 app.get("/api/pc_status/get",(req,res)=>{
     (async ()=>{
         try{
