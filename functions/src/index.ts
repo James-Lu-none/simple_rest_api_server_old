@@ -57,8 +57,8 @@ app.put("/api/pc_status/set", (req, res) => {
       }
       data = assignBooleanIfNotNullOrUndefined("isPcOn", req.body.isPcOn, data);
       data = assignBooleanIfNotNullOrUndefined(
-        "isPowerOnTriggered",
-        req.body.isPowerOnTriggered,
+        "powerOnTriggerFlag",
+        req.body.powerOnTriggerFlag,
         data
       );
       console.log(data);
